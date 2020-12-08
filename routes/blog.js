@@ -9,6 +9,6 @@ const {getBlogById}=require("../middlewares/blog")
 router.param("blogId",getBlogById);
 router.get("/blogs",getAllBlogs);
 router.post("/blog",isSignedIn,isAuthenticated,createBlog);
-router.delete("/blog/:blogId",isSignedIn,deleteBlog);
+router.delete("/blog/:blogId",isSignedIn,isAuthenticated,blogValidations,deleteBlog);
 
 module.exports=router

@@ -19,7 +19,7 @@ return res.json({error:errors.array()[0].msg})
         if(error){
             return res.status(401).json({error:"Cannot create new blogs"})
         }
-        req.user.updateBlogs(savedBlog._id);
+        req.user.addBlog(savedBlog._id);
         return res.json({blog:savedBlog})
     })
 }
@@ -29,6 +29,7 @@ Blog.findByIdAndRemove(req.blog._id).exec((error,data)=>{
     if(error){
         return res.status(401).json({error:"cannot delete blog"})
     }
+    req.user.removeBlog(data._id);
     return res.json({message:"deleted successfully"})
 })
 }

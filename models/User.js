@@ -28,11 +28,14 @@ PublisherSchema.method({
         .update(plainpassword)
         .digest("hex")
     },
-    updateBlogs:function(blogId){
+    addBlog:function(blogId){
         this.blogs.push(blogId);
         this.save();
-    }
-    ,
+    },
+    removeBlog:function(blogId){
+        this.blogs.pull(blogId);
+        this.save();
+    },
     resetPasswordLink:function(){
         this.reset_token=uuid();
         this.expiry_token=Date.now()+360000
